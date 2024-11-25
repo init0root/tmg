@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dedicação</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #252525;
+            color: #FFFF;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            text-align: center;
+            flex-direction: column;
+        }
+        #message {
+            max-width: 90%;
+        }
+        #button-container {
+            margin-top: 20px;
+            opacity: 0; /* Inicialmente invisível */
+            transition: opacity 1s ease; /* Transição suave de 1 segundo */
+        }
+        #button-container.visible {
+            opacity: 1; /* Totalmente visível */
+        }
+        #action-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            border-radius: 30px; /* Bordas arredondadas */
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        #action-button:hover {
+            transform: scale(1.1); /* Leve aumento ao passar o mouse */
+        }
+        #special-message {
+            margin-top: 20px;
+            display: none; /* Oculto inicialmente */
+            font-size: 18px;
+            color: #FFDD33;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="message"></div>
+    <div id="button-container">
+        <button id="action-button">Clique para sorrir!</button>
+    </div>
+    <div id="special-message"></div>
+    <script>
+        const text = "Ainda não temos muitas fotos, viagens e experiências colecionadas. Mas, com o que já conquistamos até aqui, tenho uma lista de músicas para dedicar a ti 😉";
+        const messageElement = document.getElementById('message');
+        const buttonContainer = document.getElementById('button-container');
+        const specialMessageElement = document.getElementById('special-message');
+        let index = 0;
+
+        // Frases que serão exibidas
+        const phrases = [
+            "Você faz cada dia meu se tornar especial. ❤️",
+            "Seu sorriso ilumina os momentos mais simples da vida.",
+            "Agradeço por ser tão incrível e estar ao meu lado.",
+            "Você é o motivo pelo qual acredito no amor verdadeiro. 🌹",
+            "Ah, já estava esquecendo, aqui estão as músicas kkk. Te amo ❤️"
+        ];
+
+        let phraseIndex = 0;
+
+        function typeWriter() {
+            if (index < text.length) {
+                messageElement.textContent += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 50); // Controle da velocidade (50ms por letra)
+            } else {
+                showButton(); // Exibe o botão quando o texto terminar
+            }
+        }
+
+        function showButton() {
+            buttonContainer.classList.add('visible'); // Aplica a classe para o fade-in
+        }
+
+        document.getElementById('action-button').onclick = function () {
+            if (phraseIndex < phrases.length) {
+                specialMessageElement.textContent = phrases[phraseIndex];
+                specialMessageElement.style.display = "block"; // Mostra a mensagem especial
+                phraseIndex++;
+            } else {
+                alert('As músicas já estão aqui para você! 🎶');
+                // Abrir o link em uma nova aba
+                window.open('https://music.youtube.com/browse/VLPLdRAhwNxEg1EtOBejoJehYW07k7_u9_FQ', '_blank');
+            }
+        };
+
+        typeWriter(); // Iniciar a animação
+    </script>
+</body>
+</html>
